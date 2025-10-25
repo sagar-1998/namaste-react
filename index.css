@@ -1,4 +1,36 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding:0px;
+}
 #heading{
   color: blueviolet;
   font-family: sans-serif;
+}
+
+.header{
+  padding: 10px;
+  max-height: 100px;
+  display: flex;
+  justify-content: space-between;
+  background-color: lightblue;
+}
+.header-search-bar-container {
+  flex: 1;
+  align-self: center;
+  margin: auto;
+  /* background-color: green; */
+}
+.header-search-bar {
+  width: 50em;
+  padding: 10px;
+  border: 1px solid lightblue;
+}
+.header-logo {
+  max-width: 40px;
+  height: auto;
+}
+.header-avatar{
+  max-width: 40px;
+  height: auto;
 }

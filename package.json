@@ -14,8 +14,8 @@
   "license": "ISC",
   "author": "Akshay Saini",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build",
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "devDependencies": {
