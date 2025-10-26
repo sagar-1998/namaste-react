@@ -1,36 +1,106 @@
 * {
   box-sizing: border-box;
   margin: 0px;
-  padding:0px;
+  padding: 0px;
 }
-#heading{
-  color: blueviolet;
-  font-family: sans-serif;
+.header > .nav-bar {
+  display: flex;
+  height: 140px;
+  justify-content: space-between;
+  padding: 0px 100px;
+  margin: 5px;
+  border: 1px solid lightgray;
 }
 
-.header{
-  padding: 10px;
-  max-height: 100px;
+.nav-items {
+  list-style: none;
   display: flex;
-  justify-content: space-between;
-  background-color: lightblue;
+  font-size: 1.2rem;
+  align-items: center;
 }
-.header-search-bar-container {
-  flex: 1;
-  align-self: center;
-  margin: auto;
-  /* background-color: green; */
-}
-.header-search-bar {
-  width: 50em;
+
+.nav-link {
   padding: 10px;
-  border: 1px solid lightblue;
+  margin: 0px 10px;
 }
-.header-logo {
-  max-width: 40px;
-  height: auto;
+.search {
+  padding: 40px;
+  border: 1px solid lightgray;
+  margin: 5px;
 }
-.header-avatar{
-  max-width: 40px;
+.res-container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid lightgray;
+  margin: 5px;
+  justify-content: space-evenly;
+}
+
+.res-card {
+  width: 300px;
+  background-color: lightgray;
+  transition: 1s;
+  border-radius: 5px;
+  margin: 10px;
+}
+.res-card:hover {
+  border: 1px solid lightgray;
+}
+.res-card-desc {
+  padding: 10px;
+}
+.res-card-img {
+  max-width: 100%;
   height: auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+.filter-btn {
+  margin: 20px;
+  cursor: pointer;
+  padding: 5px;
+}
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid lightgray;
+  margin: 5px;
+  justify-content: space-evenly;
+}
+.shimmer-card {
+  width: 300px;
+  height: 400px;
+  background-color: lightgray;
+  transition: 1s;
+  border-radius: 5px;
+  margin: 10px;
+}
+.shimmer-card__image{
+  width: 280px;
+  height: 180px;
+  margin: 10px;
+  background-color: white;
+}
+
+.shimeer-card__desc-box__text{
+  width: 230px;
+  height: 10px;
+  margin: 20px 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.login-btn {
+  padding: 5px 15px;
+}
+
+.search-input{
+  padding:10px;
+
+}
+.search-btn{
+  padding: 10px;
+}
+.filter-search-container{
+  margin-left: 20px;
 }
