@@ -2,6 +2,8 @@
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
+  font-family: sans-serif;
+  line-height: 2rem;
 }
 .header > .nav-bar {
   display: flex;
@@ -95,12 +97,27 @@
 }
 
 .search-input{
-  padding:10px;
+  padding:5px;
 
 }
 .search-btn{
-  padding: 10px;
+  padding: 5px;
 }
 .filter-search-container{
   margin-left: 20px;
+}
+.no-restaurants{
+  margin: 5px 15px;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.product-img{
+  max-width: 100%;
+  width: 400px;
 }
