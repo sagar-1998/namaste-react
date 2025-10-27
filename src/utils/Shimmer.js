@@ -1,7 +1,7 @@
-const Shimmer = () => {
+const Shimmer = ({ numberOfCards }) => {
   return (
     <div className="shimmer-container">
-      {Array(10)
+      {Array(numberOfCards)
         .fill("")
         .map((_, i) => (
           <div key={Date.now().toString() + i} className="shimmer-card">

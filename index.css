@@ -121,3 +121,32 @@
   max-width: 100%;
   width: 400px;
 }
+
+.login-container{
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container h1 {
+  margin: 20px 0px ;
+}
+
+.user-container{
+  border: 1px solid lightgray;
+  padding: 20px;
+  margin: 10px;
+}
+
+.about-page {
+  margin: 10px; 
+  border: 1px solid lightblue; 
+  padding: 15px;
+}
+.about-heading{
+  margin: 10px; 
+  border: 1px solid lightblue; 
+  padding: 20px;
+}

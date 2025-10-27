@@ -1,22 +1,15 @@
-import { useState, useEffect } from "react";
-import { GET_PRODUCT_DETAIL_URL, MENU_RES_URL } from "../utils/constants";
 import { useParams } from "react-router";
 import { strCapitalize } from "../utils/utility";
+import Shimmer from "../utils/Shimmer";
+import useFetchProduct from "../utils/useFetchProduct";
 
 const RestaurantDetails = () => {
   const { resId } = useParams();
-  const [product, setProduct] = useState({});
 
-  const fetchResData = async () => {
-    const data = await fetch(GET_PRODUCT_DETAIL_URL + resId);
-    const json = await data.json();
-    console.log(json);
-    setProduct(json);
-  };
-
-  useEffect(() => {
-    fetchResData();
-  }, []);
+  const product = useFetchProduct(resId);
+  if (!(Object.keys(product).length > 0)) {
+    return <Shimmer numberOfCards={1} />;
+  }
 
   const { thumbnail, title, description, brand, tags, price } = product;
   return (

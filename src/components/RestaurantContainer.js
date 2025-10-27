@@ -4,33 +4,40 @@ import RestaurantCard from "./RestaurantCard";
 import { GET_RES_URL, GET_PRODUCT_URL } from "../utils/constants";
 import Shimmer from "../utils/Shimmer";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
+import useFetchProducts from "../utils/useFetchProducts";
 const resInfoData = resData.map((res) => {
   return res.info;
 });
 const RestaurantContainer = () => {
+  const products = useFetchProducts();
+  const onlineStatus = useOnlineStatus();
   const [resData, setResData] = useState([]);
   const [filteredResData, setFilteredResData] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const fetchData = async () => {
-    let data = await fetch(GET_PRODUCT_URL);
-    data = await data.json();
-    console.log(data.products);
-    setResData(data.products);
-    setFilteredResData(data.products);
-  };
+  useEffect(() => {
+    setFilteredResData(products);
+  }, [products]);
 
   useEffect(() => {
-    fetchData();
+    setResData(products);
   }, []);
 
   const handleSearchBtnClick = () => {
     const filteredRestaurantsList = resData.filter((res) =>
       res.title.toLowerCase().includes(searchText.toLowerCase())
     );
-    console.log(filteredRestaurantsList);
     setFilteredResData(filteredRestaurantsList);
   };
+
+  if (!onlineStatus) {
+    return (
+      <h1 className="centered">
+        😳 Looks like you are Offline, Please check your internet connection!!!
+      </h1>
+    );
+  }
 
   return (
     <div>
@@ -68,7 +75,7 @@ const RestaurantContainer = () => {
           })}
         </div>
       ) : (
-        <Shimmer />
+        <Shimmer numberOfCards={10} />
       )}
     </div>
   );
