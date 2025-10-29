@@ -7,9 +7,12 @@ const RestaurantCard = ({ resData }) => {
   const { name, cuisines, avgRating, costOfTwo, imageIndex } = resData;
   const cuisinesImages = images;
   const { userName } = useContext(UserContext);
-
+  // console.log(resData);
   return (
-    <div className="p-2 m-2 w-60 h-[400px] bg-gray-100 rounded-lg hover:bg-gray-200 transition">
+    <div
+      data-testid="resCard"
+      className="p-2 m-2 w-60 h-[400px] bg-gray-100 rounded-lg hover:bg-gray-200 transition"
+    >
       <div className="">
         <img
           className="max-w-[100%] bg-clip-content bg-white rounded-md"

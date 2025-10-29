@@ -6,7 +6,6 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { addPromotionFlag } from "../utils/utility";
 import withPromotion from "../hoc/withPromotion";
 import useFetchRestaurants from "../utils/useFetchRestaurants";
-import { useContext } from "react";
 import UserContext from "../Context/UserContext";
 const RestaurantContainer = () => {
   const data = useFetchRestaurants();
@@ -29,9 +28,11 @@ const RestaurantContainer = () => {
   }, []);
 
   const handleSearchBtnClick = () => {
-    const filteredRestaurantsList = resData.filter((res) =>
-      res.title.toLowerCase().includes(searchText.toLowerCase())
-    );
+    const filteredRestaurantsList = resData?.filter((res) => {
+      // console.log(res.info.name.toLowerCase(), searchText);
+
+      return res.info.name.toLowerCase().includes(searchText);
+    });
     setFilteredResData(filteredRestaurantsList);
   };
 
@@ -45,12 +46,13 @@ const RestaurantContainer = () => {
 
   const RestaurantCardPromoted = withPromotion(RestaurantCard);
   return (
-    <div>
+    <div className="" data-testid="resCard">
       <div className="p-10 ">
         <h2>{userName}</h2>
       </div>
       <div className="my-10 px-6 ">
         <input
+          data-testid={"searchInput"}
           className="px-5 py-2 border-1 border-gray-400 rounded-md"
           type="text"
           onChange={(e) => setSearchText(e.target.value)}
@@ -65,11 +67,14 @@ const RestaurantContainer = () => {
           className="filter-btn bg-indigo-300 px-4 py-2 rounded-lg ml-10 shadow-md shadow-blue-800 cursor-pointer"
           type="button"
           onClick={() => {
-            const filteredResDataByRating = resData.filter(
-              (res) => res.avgRating > 2.5
+            const filteredResDataByRating = resData?.filter(
+              (res) => res?.info?.avgRating > 4.5
             );
-            setResData(filteredResDataByRating);
+            // console.log(filteredResDataByRating);
+            setFilteredResData(filteredResDataByRating);
+            // setResData(filteredResDataByRating);
           }}
+          data-testid={"topRatedResBtn"}
         >
           Top Rated Restaurants
         </button>
@@ -93,7 +98,7 @@ const RestaurantContainer = () => {
                 key={res.id}
                 to={"/restaurants/" + res.id.toString() + i.toString()}
               >
-                {res.promotion ? (
+                {res.veg ? (
                   <RestaurantCardPromoted resData={{ ...res, imageIndex: i }} />
                 ) : (
                   <RestaurantCard resData={{ ...res, imageIndex: i }} />

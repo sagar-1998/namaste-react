@@ -35,9 +35,9 @@ const Header = () => {
             <Link to="/grocery">Grocery</Link>
           </li>
           <Link to={"/cart"}>
-            <li className="px-5 ">
-              <span className="text-xl">🛒</span>{" "}
-              <span className="">- {cartItems.length} item(s)</span>
+            <li className="px-5 " data-testid="headerCart">
+              <span className="text-xl">Cart</span>
+              <span className=""> - {cartItems.length} item(s)</span>
             </li>
           </Link>
           <li className="px-5">

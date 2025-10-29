@@ -7,10 +7,10 @@ import { useState } from "react";
 
 const RestaurantDetails = ({ resInfo }) => {
   const { resId } = useParams();
-  const ogResId = resId.toString().slice(0, -1);
+  const ogResId = resId?.toString().slice(0, -1);
   const resData = useFetchRestaurant(ogResId);
   const newResData = resData?.data?.cards[2]?.card?.card?.info;
-  const imageIndex = resId.slice(-1);
+  const imageIndex = resId?.slice(-1);
   const [showIndex, setShowIndex] = useState(-1);
 
   if (!(Object.keys(resData).length > 0)) {

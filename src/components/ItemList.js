@@ -21,6 +21,7 @@ const ItemList = ({ list }) => {
         const sortedItem = item?.card?.info;
         return (
           <div
+            data-testid="resMenuItems"
             key={sortedItem?.id}
             className="flex justify-between items-center border-b-2 border-gray-200 my-6"
           >
