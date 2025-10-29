@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import RestaurantContainer from "./components/RestaurantContainer";
@@ -10,15 +10,28 @@ import Error from "./components/Error";
 import RestaurantDetails from "./components/RestaurantDetails";
 import Login from "./components/Login";
 import Shimmer from "./utils/Shimmer";
+import UserContext from "./Context/UserContext";
+
+// how to change the context value
 
 const Grocery = lazy(() => import("./components/Grocery"));
 const AppLayout = () => {
+  const data = useContext(UserContext);
+  const [userName, setUserName] = useState(data.userName);
+  // const [userName1, setUserName1] = useState(data.userName);
   return (
-    <div className="app-container">
-      <Header />
-      <Outlet />
-      <Footer />
-    </div>
+    // It is necessary to pass value provider
+    <UserContext.Provider value={{ userName: userName, setUserName }}>
+      <div className="app-container">
+        {/* <UserContext.Provider
+          value={{ userName: userName1, setUserName: setUserName1 }}
+        > */}
+        <Header />
+        {/* </UserContext.Provider> */}
+        <Outlet />
+        {/* <Footer /> */}
+      </div>
+    </UserContext.Provider>
   );
 };
 
@@ -61,7 +74,5 @@ const appRouter = createBrowserRouter([
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
-console.log(root.render);
 
 root.render(<RouterProvider router={appRouter} />);

@@ -23,10 +23,13 @@
     "parcel": "^2.16.0"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.9.2",
+    "@tailwindcss/postcss": "^4.1.16",
     "formik": "^2.4.6",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-router-dom": "^7.9.4"
+    "react-router-dom": "^7.9.4",
+    "tailwindcss": "^4.1.16"
   },
   "browserslist": [
     "last 2 versions"

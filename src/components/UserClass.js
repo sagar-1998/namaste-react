@@ -3,7 +3,7 @@ import UserAge from "./UserAge";
 class UserClass extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.name + " Construtor");
+    // console.log(this.props.name + " Construtor");
 
     this.state = {
       count: 0,
@@ -11,17 +11,17 @@ class UserClass extends React.Component {
     };
   }
   componentDidMount() {
-    console.log(this.props.name + " componentDidMount");
+    // console.log(this.props.name + " componentDidMount");
   }
   componentDidUpdate() {
-    console.log(this.props.name + " componentDidUpdate");
+    // console.log(this.props.name + " componentDidUpdate");
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
   render() {
-    console.log(this.props.name + " Render");
+    // console.log(this.props.name + " Render");
 
     const { count } = this.state;
     return (

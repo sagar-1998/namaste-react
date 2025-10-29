@@ -1,27 +1,31 @@
-import { useEffect, useState } from "react";
-import { resData } from "../utils/mockData";
+import { useContext, useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import { GET_RES_URL, GET_PRODUCT_URL } from "../utils/constants";
 import Shimmer from "../utils/Shimmer";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import useFetchProducts from "../utils/useFetchProducts";
-const resInfoData = resData.map((res) => {
-  return res.info;
-});
+import { addPromotionFlag } from "../utils/utility";
+import withPromotion from "../hoc/withPromotion";
+import useFetchRestaurants from "../utils/useFetchRestaurants";
+import { useContext } from "react";
+import UserContext from "../Context/UserContext";
 const RestaurantContainer = () => {
-  const products = useFetchProducts();
+  const data = useFetchRestaurants();
   const onlineStatus = useOnlineStatus();
   const [resData, setResData] = useState([]);
   const [filteredResData, setFilteredResData] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  useEffect(() => {
-    setFilteredResData(products);
-  }, [products]);
+  const listOfRestaurants =
+    data?.data?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants;
+  const { userName, setUserName } = useContext(UserContext);
 
   useEffect(() => {
-    setResData(products);
+    setFilteredResData(listOfRestaurants);
+  }, [data]);
+
+  useEffect(() => {
+    setResData(listOfRestaurants);
   }, []);
 
   const handleSearchBtnClick = () => {
@@ -39,19 +43,26 @@ const RestaurantContainer = () => {
     );
   }
 
+  const RestaurantCardPromoted = withPromotion(RestaurantCard);
   return (
     <div>
-      <div className="filter-search-container">
+      <div className="p-10 ">
+        <h2>{userName}</h2>
+      </div>
+      <div className="my-10 px-6 ">
         <input
-          className="search-input"
+          className="px-5 py-2 border-1 border-gray-400 rounded-md"
           type="text"
           onChange={(e) => setSearchText(e.target.value)}
         />
-        <button className="search-btn" onClick={handleSearchBtnClick}>
+        <button
+          className="bg-emerald-100 px-4 py-2 rounded-lg ml-2 shadow-sm shadow-cyan-950 cursor-pointer"
+          onClick={handleSearchBtnClick}
+        >
           Search
         </button>
         <button
-          className="filter-btn"
+          className="filter-btn bg-indigo-300 px-4 py-2 rounded-lg ml-10 shadow-md shadow-blue-800 cursor-pointer"
           type="button"
           onClick={() => {
             const filteredResDataByRating = resData.filter(
@@ -62,14 +73,31 @@ const RestaurantContainer = () => {
         >
           Top Rated Restaurants
         </button>
+        <input
+          className="p-2 mx-5 border border-gray-500 rounded-md"
+          type="text"
+          value={userName}
+          onChange={(e) => {
+            setUserName(e.target.value);
+          }}
+        />
       </div>
 
       {filteredResData?.length > 0 ? (
-        <div className="res-container">
-          {filteredResData.map((res) => {
+        <div className="res-container flex flex-wrap justify-evenly">
+          {filteredResData.map((resData, i) => {
+            const res = resData.info;
+
             return (
-              <Link key={res.id} to={"/restaurants/" + res.id}>
-                <RestaurantCard key={res.id} resData={res} />{" "}
+              <Link
+                key={res.id}
+                to={"/restaurants/" + res.id.toString() + i.toString()}
+              >
+                {res.promotion ? (
+                  <RestaurantCardPromoted resData={{ ...res, imageIndex: i }} />
+                ) : (
+                  <RestaurantCard resData={{ ...res, imageIndex: i }} />
+                )}
               </Link>
             );
           })}
