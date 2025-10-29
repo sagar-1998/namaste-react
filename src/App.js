@@ -11,7 +11,9 @@ import RestaurantDetails from "./components/RestaurantDetails";
 import Login from "./components/Login";
 import Shimmer from "./utils/Shimmer";
 import UserContext from "./Context/UserContext";
-
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 // how to change the context value
 
 const Grocery = lazy(() => import("./components/Grocery"));
@@ -21,17 +23,19 @@ const AppLayout = () => {
   // const [userName1, setUserName1] = useState(data.userName);
   return (
     // It is necessary to pass value provider
-    <UserContext.Provider value={{ userName: userName, setUserName }}>
-      <div className="app-container">
-        {/* <UserContext.Provider
+    <Provider store={appStore}>
+      <UserContext.Provider value={{ userName: userName, setUserName }}>
+        <div className="app-container">
+          {/* <UserContext.Provider
           value={{ userName: userName1, setUserName: setUserName1 }}
         > */}
-        <Header />
-        {/* </UserContext.Provider> */}
-        <Outlet />
-        {/* <Footer /> */}
-      </div>
-    </UserContext.Provider>
+          <Header />
+          {/* </UserContext.Provider> */}
+          <Outlet />
+          {/* <Footer /> */}
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
@@ -68,6 +72,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
